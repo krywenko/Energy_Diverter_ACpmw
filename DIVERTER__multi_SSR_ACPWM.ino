@@ -1,5 +1,5 @@
 #define FILTERSETTLETIME 5000 //  Time (ms) to allow the filters to settle before sending data  
-#include "EmonLibD.h"
+#include "EmonLib.h"
 EnergyMonitor ct1,ct2,ct3, ct4;   // Create  instances for each CT channel
 
 #include <Wire.h> 
@@ -11,11 +11,11 @@ const int CT1 = 1;                                                      //  dive
 const int CT2 = 1;                                                      // Inverter sensor - Set to 0 to disable 
 const int CT3 = 1;                                                      //grid sensor 
 const int CT4 = 0;                                                      // windgen  sensor - Set to 0 to disable  disable if using diverter display
-int FREQ = 60;
-int FRAC =4;
-int BL =1;
-int OL =3;
-float element = 5000; //wattage of  element  for diversion -  make bigger  then then what you have to decrease  buuble search sensitivity
+int FREQ = 60;  // grid freq
+int FRAC =4;  // fractional fo grid freq
+int BL =1;  //basic latch
+int OL =3;  //onlatch
+float element = 3000; //wattage of  element  for diversion -  make bigger  then then what you have to decrease  buuble search sensitivity
 int LCD = 0;          // 1 to enable 0 to disable
 int SSR4 =1;          // 1=  4 ssr and disables static,  0=  3 SSR & 1 static
 int ios = 1;          /// Number of SSR to control
