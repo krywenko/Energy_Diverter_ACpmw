@@ -11,10 +11,10 @@ const int CT1 = 1;                                                      //  dive
 const int CT2 = 1;                                                      // Inverter sensor - Set to 0 to disable 
 const int CT3 = 1;                                                      //grid sensor 
 const int CT4 = 0;                                                      // windgen  sensor - Set to 0 to disable  disable if using diverter display
-int FREQ = 60;  // grid freq
-int FRAC =4;  // fractional fo grid freq
-int BL =1;  //basic latch
-int OL =3;  //onlatch
+int FREQ = 60;
+int FRAC =4;
+int BL =1;
+int OL =3;
 float element = 3000; //wattage of  element  for diversion -  make bigger  then then what you have to decrease  buuble search sensitivity
 int LCD = 0;          // 1 to enable 0 to disable
 int SSR4 =1;          // 1=  4 ssr and disables static,  0=  3 SSR & 1 static
@@ -342,7 +342,16 @@ if ( stat == 0){
   
 }
 if ( stat == 1){
-  analogWrite(pulse2, DIVERT );
+  
+      ACpwm.initialize(FREQ,FRAC,pulse2,255); //FREQ,FRAC,PIN, step
+      ACpwm.setLatch(BL,OL);
+      ACpwm.setDutyCycle(DIVERT);
+      unsigned long start = millis();   
+      while((millis()-start)<200 && analogRead(A0)>490  );//wait for positive half period to expire
+      while((millis()-start)<200 && analogRead(A0)<490 );
+       ACpwm.ZeroCrossing();
+       
+  //analogWrite(pulse2, DIVERT );
   analogWrite(pulse3, 0 );
   if (SSR4 == 1){
   analogWrite(pulse4, 0 );  //enable for 4th ssr
@@ -357,7 +366,15 @@ if ( stat == 1){
  
 }
 if ( stat == 2){
-  analogWrite(pulse3, DIVERT );
+  
+      ACpwm.initialize(FREQ,FRAC,pulse3,255); //FREQ,FRAC,PIN, step
+      ACpwm.setLatch(BL,OL);
+      ACpwm.setDutyCycle(DIVERT);
+      unsigned long start = millis();   
+      while((millis()-start)<200 && analogRead(A0)>490  );//wait for positive half period to expire
+      while((millis()-start)<200 && analogRead(A0)<490 );
+       ACpwm.ZeroCrossing();
+  //analogWrite(pulse3, DIVERT );
   if (SSR4 == 1){
   analogWrite(pulse4, 0 );                  //enable for 4th ssr
   }
@@ -368,7 +385,15 @@ if ( stat == 2){
      analogWrite(invstatus2, Ppulse);      // led display  showing overproduction   
 }
 if ( stat == 3){
-  analogWrite(pulse4, DIVERT );                  //enable for 4th ssr
+  
+      ACpwm.initialize(FREQ,FRAC,pulse4,255); //FREQ,FRAC,PIN, step
+      ACpwm.setLatch(BL,OL);
+      ACpwm.setDutyCycle(DIVERT);
+      unsigned long start = millis();   
+      while((millis()-start)<200 && analogRead(A0)>490  );//wait for positive half period to expire
+      while((millis()-start)<200 && analogRead(A0)<490 );
+       ACpwm.ZeroCrossing();
+ // analogWrite(pulse4, DIVERT );                  //enable for 4th ssr
   TMP = (DIVERT+765); percent = (TMP/DIVS);
   Serial.print("TaskValueSet,2,1,"); Serial.println(percent);
      Ppulse = TMP;
