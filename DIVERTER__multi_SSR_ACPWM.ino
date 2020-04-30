@@ -128,7 +128,7 @@ void loop()
  
   if (CT1) {
 
-    ct1.calcVI(20,2000,0,0,0,0,0,0,0);  //#SSR, Current SSR, pin1,pin2,pin3,pin4, value,                                                // Calculate all. No.of crossings, time-out 
+    ct1.calcVI(20,2000);  //#SSR, Current SSR, pin1,pin2,pin3,pin4, value,                                                // Calculate all. No.of crossings, time-out 
     emontx.power1 = ct1.realPower;
     diverter =  emontx.power1;
     Serial.print("TaskValueSet,1,3,"); Serial.println(emontx.power1);
@@ -139,7 +139,7 @@ void loop()
   
   if (CT2) {
    
-    ct2.calcVI(20,2000,0,0,0,0,0,0,0);                                                  // Calculate all. No.of crossings, time-out 
+    ct2.calcVI(20,2000);                                                  // Calculate all. No.of crossings, time-out 
     emontx.power2 = ct2.realPower;
     invert = emontx.power2;
     Serial.print("TaskValueSet,1,2,"); Serial.println(emontx.power2);  
@@ -147,7 +147,7 @@ void loop()
   } 
 
   if (CT3) {
-    ct3.calcVI(20,2000,0,0,0,0,0,0,0);                                                  // Calculate all. No.of crossings, time-out 
+    ct3.calcVI(20,2000);                                                  // Calculate all. No.of crossings, time-out 
     emontx.power3 = ct3.realPower;
     grid = emontx.power3; 
     Serial.print("TaskValueSet,1,1,"); Serial.println(emontx.power3);
@@ -155,7 +155,7 @@ void loop()
   } 
   
    if (CT4) {
-     ct1.calcVI(20,2000,0,0,0,0,0,0,0);                                                  // Calculate all. No.of crossings, time-out 
+     ct1.calcVI(20,2000);                                                  // Calculate all. No.of crossings, time-out 
     emontx.power1 = ct1.realPower;
     wind = emontx.power1; 
     Serial.print("TaskValueSet,1,3,"); Serial.println(emontx.power1);
