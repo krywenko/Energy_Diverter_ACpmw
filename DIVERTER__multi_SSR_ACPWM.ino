@@ -195,7 +195,7 @@ step2 = (prestep1 + step1);
 }
 }
 
-if (CT2){
+if (CT3){
 if (grid !=0) {
   //curgrid = 0;
   stepc = (grid / element); 
